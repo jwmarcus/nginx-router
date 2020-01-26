@@ -1,0 +1,39 @@
+version: '3.7' # Docker Engine 18.06.0+
+
+services:
+
+  proxy:
+    build: .
+    image: jwmarcus/nginx-router
+    ports: 
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+    networks:
+      - frontend
+    depends_on:
+      - jwmarcus-site
+      - jwmarcus-blog
+
+  jwmarcus-site:
+    build: ../jwmarcus-site # Served on :80
+    image: jwmarcus/jwmarcus-site
+    networks:
+      - frontend
+  
+  jwmarcus-blog:
+    build: ../jwmarcus-blog # Served on :4000
+    networks:
+      - frontend
+
+# Per the docs: "User-defined bridge networks
+# are superior to the default bridge network."
+# https://docs.docker.com/network/bridge/
+# #differences-between-user-defined-bridges-and-the-default-bridge
+
+networks:
+
+  frontend:
+
+  # backend: # Not in use yet
