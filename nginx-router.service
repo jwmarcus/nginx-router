@@ -1,0 +1,13 @@
+[Unit]
+Description=Service to start docker-compose for nginx-router
+After=network.target docker.service
+
+[Service]
+Type=simple
+
+ExecStart=/usr/local/bin/docker-compose -f /src/nginx-router/docker-compose.yml up
+ExecStop=/usr/local/bin/docker-compose -f /src/nginx-router/docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target
+
