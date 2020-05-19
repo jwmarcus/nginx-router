@@ -29,7 +29,7 @@ services:
       - frontend
 
   w1jwm-site:
-    build: ../w1jwm-site # Served on :80
+    build: ../w1jwm-site # Served on :8000
     image: jwmarcus/w1jwm-site
     networks:
       - frontend
