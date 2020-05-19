@@ -15,6 +15,7 @@ services:
     depends_on:
       - jwmarcus-site
       - jwmarcus-blog
+      - w1jwm-site
 
   jwmarcus-site:
     build: ../jwmarcus-site # Served on :80
@@ -27,6 +28,12 @@ services:
     networks:
       - frontend
 
+  w1jwm-site:
+    build: ../w1jwm-site # Served on :80
+    image: jwmarcus/w1jwm-site
+    networks:
+      - frontend
+  
 # Per the docs: "User-defined bridge networks
 # are superior to the default bridge network."
 # https://docs.docker.com/network/bridge/
